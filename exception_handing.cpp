@@ -8,35 +8,43 @@ catch: Một chương trình bắt một Exception với một Exception Handler
 
 try: Một khối try có thể được bắt bởi một số lượng cụ thể exception. Nó được theo sau bởi một hoặc nhiều khối catch.
 */
-#include<iostream>
-#include<math.h>
-#include<stdio.h>
+#include <iostream>
+#include <math.h>
+#include <stdio.h>
 using namespace std;
- 
-double division(int a, int b) {
-   if( b == 0 ) {
+
+double division(int a, int b)
+{
+   if (b == 0)
+   {
       throw "b Division by zero!";
    }
-   else if(a == 0){
-       throw "a Division by zero!";
-   
+   else if (a == 0)
+   {
+      throw "a Division by zero!";
    }
-   return (a/b);
+   return (a / b);
 }
-int main () {
+int main()
+{
    int x = 0;
    int y = 40;
    double z = 0;
- 
-   try {
+
+   try
+   {
       z = division(x, y);
       cout << z << endl;
-   } catch (const char* msg) {
-     cout << msg << endl;
    }
-   catch(const char* msg1){
-     cout << msg1 << endl;
+   catch (const char *msg)
+   {
+      cout << msg << endl;
    }
- 
+
+   catch (const char *msg1)
+   {
+      cout << msg1 << endl;
+   }
+
    return 0;
 }
