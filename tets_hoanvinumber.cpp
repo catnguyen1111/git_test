@@ -1,34 +1,66 @@
+
+#include <stdio.h>
+#include <math.h>
 #include<iostream>
 using namespace std;
-#define MAX 20;
-bool IsGrow1(int a[], int n) {
-    int dem = 0;
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i + 1] >= a[i]) dem++;
-    }
-    if (dem == n ) return true;
-    else return false;
+void nhapmang(int arr[], int n){
+     for(int i =0 ; i < n;i++)
+     {
+
+          cout << "nhap gia tri arr["<< i << "]: ";
+          cin >> arr[i];
+     }
 }
-void Enter_value(int a[], int n){
-    for(int i = 0; i <= n; i++)
-    {
-        cin >> a[i];
+void xuatmang(int arr[],int n)
+{
+     for(int i=0;i<n;i++)
+     {
+     
+          cout << arr[i] <<" ";
+     }
+}
+bool checksonguyento(int n){
+   if(n < 2){
+       return false;
+   }
+   else {
+       if( n == 2 ){
+            return true;
+        }
+       else {
+           if(n %2 == 0){
+            return false;
+           }
+            else{
+                for(int i =2 ;i< n;i++){
+                    if( n % i == 0){
+                       return false;
+                    }
+                }
+           }
+       }
+   }
+   return true;
+  
+}
+void showsonguyento(int arr[], int n){
+    for(int i = 0; i< n;i++){
+        if(checksonguyento(arr[i])== true){
+            cout << arr[i] << " ";
+        }
     }
 }
 int main(){
-    int Arr[10];
-    int m,i;
-    cout << "nhap m ";
-    cin >> m;
-    Enter_value(Arr,m);
-    if(IsGrow1(Arr,m) == true )
-    {
-        cout << "dãy số tăng dần";
-    }
+    int arr[1000];
+    int n;
+    cout << "nhap n: ";
+    cin >> n;
+    nhapmang(arr, n);
+    xuatmang(arr,n);
+    cout << endl;
+    showsonguyento(arr,n);
 
-    else 
-    {
-        cout << "day so giam";
-    }
+    
+    
 }
+ 

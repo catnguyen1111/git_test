@@ -1,94 +1,132 @@
-#include<stdio.h>
-#include<string>
+#include <stdio.h>
+#include <string>
+#include <fstream>
 #include <iostream>
 using namespace std;
-class person{
+class person
+{
     string firstname;
     string lastname;
     string id;
-    public:
+
+public:
     person();
     person(string id);
-    person(string id, string firstname,string lastname);
+    person(string id, string firstname, string lastname);
+    void setperson(string id, string firstname, string lastname);
     string getid();
     string getfirstname();
     string getlastname();
     string getfullname();
     void show();
+    void openfile(string namefile);
+    void savedata(string comment, string data);
 };
-person :: person()
+person ::person()
 {
     firstname = " ";
-    lastname =" ";
+    lastname = " ";
     id = " ";
 }
-person::person(string id){   
+person::person(string id)
+{
     person();
-    this -> id= id;      
+    this->id = id;
 }
-person:: person(string id, string firstname,string lastname){
+person::person(string id, string firstname, string lastname)
+{
     person();
-    this -> id =id;
-    this -> firstname = firstname;
-    this -> lastname =lastname;
+    this->id = id;
+    this->firstname = firstname;
+    this->lastname = lastname;
 }
-string person::getid(){
+void person::setperson(string id, string firstname, string lastname)
+{
+    person();
+    this->id = id;
+    this->firstname = firstname;
+    this->lastname = lastname;
+}
+string person::getid()
+{
     return id;
 }
-string person::getfirstname(){
+string person::getfirstname()
+{
     return firstname;
 }
-string person::getlastname(){
+string person::getlastname()
+{
     return lastname;
 }
-string person::getfullname(){
-    return this -> firstname + " " + this->lastname;
+string person::getfullname()
+{
+    return this->firstname + " " + this->lastname;
 }
 
-void person::show(){
+void person::show()
+{
     cout << " ID: " << this->id << endl;
-    cout << " First name: " << this->firstname<< endl;
+    cout << " First name: " << this->firstname << endl;
     cout << " Last name: " << this->lastname << endl;
-    cout << " Full name: "<< this -> firstname + " " + this->lastname << endl;
+    cout << " Full name: " << this->firstname + " " + this->lastname << endl;
 }
-class Student:public person
+void person::openfile(string namefile)
+{
+    ofstream Myfile(namefile);
+}
+void person::savedata(string comment, string data)
+{
+    ofstream Myfile;
+    Myfile << comment, data;
+}
+class Student : public person
 {
     string classroom;
     int age;
-   public:
-   Student(string id, string firstname,string lastname, string classroom, int age);
-   string getclassroom();
-   int getage(); 
-   void showInfo();
+
+public:
+    Student(string id, string firstname, string lastname, string classroom, int age);
+    string getclassroom();
+    int getage();
+    void showInfo();
 };
 
-Student::Student(string id, string firstname,string lastname,string classroom,int age):person(id, firstname,lastname){
-    this -> classroom = classroom;
-    this -> age = age;
+Student::Student(string id, string firstname, string lastname, string classroom, int age) : person(id, firstname, lastname)
+{
+    this->classroom = classroom;
+    this->age = age;
 }
-void Student::showInfo(){
+void Student::showInfo()
+{
     cout << " ID: " << getid() << endl;
-    cout << " First name: " << getfirstname()<< endl;
+    cout << " First name: " << getfirstname() << endl;
     cout << " Last name: " << getlastname() << endl;
-    cout << " Full name: "<< getfirstname() + " " +  getlastname() << endl;
+    cout << " Full name: " << getfirstname() + " " + getlastname() << endl;
     cout << " Classroom: " << this->classroom << endl;
-    cout << " Age: "<< this->age << endl;
+    cout << " Age: " << this->age << endl;
 }
+string Student::getclassroom()
+{
+    return this->classroom;
+}
+int Student::getage()
+{
+    return this->age;
+}
+
 int main()
 {
-   person person("1711543621","cat","nguyen");
-   //person.show();
-   Student Student("1711543621","cat","nguyen","17DCD1A",22);
-   Student.showInfo();
-   if(person.getid() == "1711543621")
-   {
-       cout << "id chinh xac";
-   }
-   else{
-       cout << "id khong chinh xac";
-   }
-  
-
-  
-   
+    ofstream Myfile("filesave.txt");
+    person person("1711543621", "cat", "nguyen");
+    Student Student("1711543621", "cat", "nguyen", "17DCD1A", 22);
+    Student.showInfo();
+    // ghi data id vào filesave
+    Myfile << " ID: " << person.getid() << endl;
+    Myfile << " First name: " << person.getfirstname() << endl;
+    Myfile << " Last name: " << person.getlastname() << endl;
+    Myfile << " Full name: " << person.getfullname() << endl;
+    Myfile << " Classroom: " << Student.getclassroom() << endl;
+    Myfile << " Age: " << Student.getage() << endl;
+    Myfile.close();
 }
